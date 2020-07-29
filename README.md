@@ -1,0 +1,2 @@
+# STM32-linusb
+STM32F103的USB_BULK数据传输，并使用libusb_win32编写上位机进行数据读写
