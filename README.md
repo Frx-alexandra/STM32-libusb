@@ -41,7 +41,7 @@ STM32F103的USB_BULK数据传输，并使用libusb_win32编写上位机进行数
 
     USB_HID_CONFIG_DESC_SIZ 为 32，这个值是配置描述符（USBD_HID_CfgFSDesc）数组的大小，根据实际包含的字节数量来更改。
 
-  * 打开usbd_desc.h修改VIP,PID。这个最好修改了不然又是识别为HID设备。
+  * 打开usbd_desc.c修改VIP,PID。这个最好修改了不然又是识别为HID设备。
   
     ``` cpp
     #define USBD_VID     1234

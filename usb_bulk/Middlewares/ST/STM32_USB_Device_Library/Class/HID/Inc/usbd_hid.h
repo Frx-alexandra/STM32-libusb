@@ -44,7 +44,7 @@ extern "C" {
 #define HID_EPIN_ADDR                 0x81U
 #define HID_EPIN_SIZE                 0x40U
 
-#define HID_EPOUT_ADDR								0X01U
+#define HID_EPOUT_ADDR                0X01U
 #define HID_EPOUT_SIZE                0x40U
 
 #define USB_HID_CONFIG_DESC_SIZ       32U
