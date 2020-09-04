@@ -1,0 +1,16 @@
+﻿生成启动时间为 2020/9/4 0:11:27。
+     1>项目“F:\VS_C\libusb\libusb\libusb.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\install\visualStudio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:prompt ..\main.c
+         main.c
+     1>f:\vs_c\libusb\main.c(119): warning C4013: “gets”未定义；假设外部返回 int
+     1>f:\vs_c\libusb\main.c(159): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+       Link:
+         D:\install\visualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\VS_C\libusb\Debug\libusb.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"F:\VS_C\libusb\Debug\libusb.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\VS_C\libusb\Debug\libusb.lib" /MACHINE:X86 Debug\main.obj
+         ..\msvc\libusb.lib
+         libusb.vcxproj -> F:\VS_C\libusb\Debug\libusb.exe
+     1>已完成生成项目“F:\VS_C\libusb\libusb\libusb.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:01.13
