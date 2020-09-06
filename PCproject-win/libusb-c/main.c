@@ -5,28 +5,28 @@
 #define VENDOR_ID 1122
 #define PRODUCT_ID 6677
 
-#define EP1_OUT_SIZE	512	      //¿É¸ù¾ÝÉè±¸ÐÞ¸Ä´óÐ¡
+#define EP1_OUT_SIZE	512	      //ï¿½É¸ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Þ¸Ä´ï¿½Ð¡
 #define EP1_IN_SIZE		512
 
-//²Î¿¼ÍøÖ·£ºhttps://blog.csdn.net/Huihong_Vitality/article/details/65661144
+//ï¿½Î¿ï¿½ï¿½ï¿½Ö·ï¿½ï¿½https://blog.csdn.net/Huihong_Vitality/article/details/65661144
 
 
 
 int main() {
-	// ´´½¨usbÉè±¸½á¹¹Ìå
+	// ï¿½ï¿½ï¿½ï¿½usbï¿½è±¸ï¿½á¹¹ï¿½ï¿½
 	struct usb_device * m_dev = NULL;
-	// ´´½¨usbÉè±¸²Ù×÷½á¹¹Ìå
+	// ï¿½ï¿½ï¿½ï¿½usbï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½
 	struct usb_dev_handle * m_dev_handle;
 
 
-	// »·¾³³õÊ¼»¯
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
 	usb_init();
-	// Ñ°ÕÒusb×ÜÏß
+	// Ñ°ï¿½ï¿½usbï¿½ï¿½ï¿½ï¿½
 	usb_find_busses();
-	// ±éÀú×ÜÏßÉÏµÄÉè±¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½è±¸
 	usb_find_devices();
 
-	// ±éÀúÉè±¸ÕÒµ½ÐèÒªµÄÉè±¸
+	// ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½Òµï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½è±¸
 	struct usb_bus *bus;
 	for (bus = usb_get_busses(); bus; bus = bus->next)
 	{
@@ -34,7 +34,7 @@ int main() {
 
 		for (dev = bus->devices; dev; dev = dev->next)
 		{
-			//Ñ°ÕÒÖ¸¶¨µÄPID,VIDÉè±¸
+			//Ñ°ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½PID,VIDï¿½è±¸
 			if (dev->descriptor.idVendor == VENDOR_ID && dev->descriptor.idProduct == PRODUCT_ID) {
 				m_dev = dev;
 			}
@@ -43,22 +43,22 @@ int main() {
 
 	if (!m_dev)
 	{
-		printf("Ö¸¶¨Éè±¸Î´ÕÒµ½\n");
+		printf("Ö¸ï¿½ï¿½ï¿½è±¸Î´ï¿½Òµï¿½\n");
 		return 1;
 	}
 
 	m_dev_handle = usb_open(m_dev);
 	if (!m_dev_handle)
 	{
-		printf("Éè±¸ÎÞ·¨´ò¿ª\n");
+		printf("ï¿½è±¸ï¿½Þ·ï¿½ï¿½ï¿½\n");
 		return 1;
 	}
 	else
 	{
-		printf("Éè±¸´ò¿ª³É¹¦!\n");
+		printf("ï¿½è±¸ï¿½ò¿ª³É¹ï¿½!\n");
 	}
 
-	//USBµÄÏà¹ØÅäÖÃ
+	//USBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	char str[64];
 
@@ -70,24 +70,24 @@ int main() {
 
 
 
-	// ½øÐÐÉè±¸ÅäÖÃ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½
 	if (usb_set_configuration(m_dev_handle, 1) < 0)
 	{
-		printf("ÎÞ·¨½øÐÐÉè±¸ÅäÖÃ\n");
+		printf("ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½\n");
 		usb_close(m_dev_handle);
 		return 1;
 	}
 
-	//claim_interface 0 ×¢²áÓë²Ù×÷ÏµÍ³Í¨ÐÅµÄ½Ó¿Ú 0
+	//claim_interface 0 ×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³Í¨ï¿½ÅµÄ½Ó¿ï¿½ 0
 	if (usb_claim_interface(m_dev_handle, 0) < 0)
 	{
-		printf("ÎÞ·¨×¢²á²Ù×÷ÏµÍ³½Ó¿Ú\n");
+		printf("ï¿½Þ·ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ó¿ï¿½\n");
 		usb_close(m_dev_handle);
 		return 1;
 	}
 
 
-	// »ñÈ¡¶ËµãµÄµØÖ·
+	// ï¿½ï¿½È¡ï¿½Ëµï¿½Äµï¿½Ö·
 	int ep = m_dev->config->interface->altsetting->endpoint->bEndpointAddress;
 	int EP_IN = 0;
 	int EP_OUT = 0;
@@ -104,7 +104,7 @@ int main() {
 
 	printf("EP_IN: 0x%02x , EP_OUT: 0x%02x \n", EP_IN, EP_OUT);
 
-	// ´´½¨²Ù×÷×Ö·û´®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
 	char RxBuffer[512];
 	memset(RxBuffer, 0, sizeof(RxBuffer));
 
@@ -115,15 +115,15 @@ int main() {
 	int ret;
 	while (1)
 	{
-		printf("ÊäÈëÖ¸Áî£º");
+		printf("ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½î£º");
 		gets(c);
 
 		if (c[0] == 'w') {
-			printf("Êä³ö\n");
+			printf("ï¿½ï¿½ï¿½\n");
 			ret = usb_bulk_write(m_dev_handle, EP_OUT, (char *)"goooo", 5, 500);
-			//¶Ëµã1¶ÁÈ¡Êý¾Ý
+			//ï¿½Ëµï¿½1ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 			if (ret != 5) {
-				printf("Êý¾ÝÐ´ÈëÊ§°Ü£¡\n");
+				printf("ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Ê§ï¿½Ü£ï¿½\n");
 				break;
 			}
 			ret = usb_bulk_read(m_dev_handle, EP_IN, (char *)RxBuffer, 512, 500);
@@ -135,29 +135,29 @@ int main() {
 		else if (c[0] == 't')
 
 		{
-			printf("²âÊÔËÙ¶È\n");
+			printf("ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½\n");
 			int start = clock();
 
-			//¶Ëµã1Ð´ÈëÊý¾Ý
+			//ï¿½Ëµï¿½1Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			for (size_t i = 0; i < 2048; i++)
 			{
 				ret = usb_bulk_write(m_dev_handle, EP_OUT, (char *)TxBuffer, 512, 0);
 
-				//¶Ëµã1¶ÁÈ¡Êý¾Ý
+				//ï¿½Ëµï¿½1ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 				ret = usb_bulk_read(m_dev_handle, EP_IN, (char *)RxBuffer, 512, 500);
 
 				if (ret != 512)
 				{
-					printf("¶Ëµã¶ÁÈ¡Êý¾ÝÊ§°Ü! %d\n", ret);
+					printf("ï¿½Ëµï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½! %d\n", ret);
 					return 1;
 				}
 
 			}
 			int end = clock();
 
-			printf("ÓÃÊ±%dms\n", end - start);
+			printf("ï¿½ï¿½Ê±%dms\n", end - start);
 			float speed = 1000.0 / (end - start);
-			printf("ËÙ¶È£º%.3fMB/s\n", speed);
+			printf("ï¿½Ù¶È£ï¿½%.3fMB/s\n", speed);
 
 		}
 		else if (c[0] == 'e')
@@ -173,10 +173,10 @@ int main() {
 	}
 
 
-	//×¢Ïú½Ó¿Ú£¬ÊÍ·Å×ÊÔ´£¬ºÍusb_claim_interface´îÅäÊ¹ÓÃ¡£
+	//×¢ï¿½ï¿½ï¿½Ó¿Ú£ï¿½ï¿½Í·ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½usb_claim_interfaceï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¡ï¿½
 	usb_release_interface(m_dev_handle, 0);
 	usb_close(m_dev_handle);
-	printf("\nÉè±¸¹Ø±Õ\n");
+	printf("\nï¿½è±¸ï¿½Ø±ï¿½\n");
 
 
 	return 0;
