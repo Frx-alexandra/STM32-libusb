@@ -1,6 +1,6 @@
 # STM32-linusb
 
-STM32F205的USB_BULK数据传输，并使用libusb_win32编写上位机进行数据读写
+STM32F205RBT6的USB_BULK数据传输，并使用libusb_win32编写上位机进行数据读写
 
 ## STM32F205RBT6程序编写
 
@@ -8,9 +8,7 @@ STM32F205的USB_BULK数据传输，并使用libusb_win32编写上位机进行数
 
     1. STM32CubeMX
 
-        前期查阅了一些USB资料，发现使用 STM32CubeMX 是一个非常好的捷径。此软件以图形化的界面形式来让你实现自己的单片机底层及各个模块初始化设置，感觉好多单片机制造厂商都开发了自己的一套这样的设计工具，大大提高的开发效率。接触过此类开发工具，使开发者摆脱了查阅硬件相关寄存器的烦恼，使我们更加专注顶层的设计。
-
-        生成文件见文件夹 usb_hid_bulk
+        前期查阅了一些USB资料，发现使用 STM32CubeMX 是一个非常好的捷径。此软件以图形化的界面形式来让你实现自己的单片机底层及各个模块初始化设置，感觉好多单片机制造厂商都开发了自己的一套这样的设计工具，大大提高的开发效率。之前使用 Silab 公司单片机的时候，也接触过此类开发工具，使开发者摆脱了查阅硬件相关寄存器的烦恼，使我们更加专注顶层的设计。
 
     2. Bus Hound
 
@@ -25,7 +23,37 @@ STM32F205的USB_BULK数据传输，并使用libusb_win32编写上位机进行数
 * 实验步骤
   
   * 首先使用STM32CubeMX生成可用的HID程序
-  * 生成的程序打开后，打开usbd_hid.h,新增端点定义
+    * 首先打开CUBEMX,选择芯片型号为STM32F205RB
+
+    * 然后打开NVIC配置选择2-2配置
+      ！[中断分组](pictures/中断配置.png)
+
+    * 之后配置RCC时钟，设置HSE时钟为外部时钟，并勾选 master clock output 1
+      ![RCC时钟](pictures/RCC配置.png)
+
+    * 之后选择usb_otg_hs，配置为device_only
+      ![usb配置](pictures/usb配置.png)
+
+    * 打开middleware，usb_device,创建HID设备，并修改，PID、VID,等信息
+      ！[usb类型设置](pictures/USB类型配置.png)
+
+    * 之后来配置系统时钟，选择手动配置
+      将外部HSE时钟频率修改为24MHZ,其他看图配置
+      ！[时钟配置](pictures/时钟配置.png)
+
+    * 打开project manager ，修改项目配置
+      ！[项目配置](pictures/项目配置1.png)
+      ！[项目配置](pictures/项目配置2.png)
+
+  * 生成的程序打开后
+    首选要打开```main.c```文件，修改 ```SystemClock_Config``` 中的时钟配置
+
+    ```cpp
+    //将 RCC_MCO1SOURCE_HSI 改为 RCC_MCO1SOURCE_HSE
+    HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSE, RCC_MCODIV_1);
+    ```
+
+  * 打开usbd_hid.h,新增端点定义
 
      ``` cpp
     #define HID_EPIN_ADDR                   0x81U
@@ -333,8 +361,14 @@ STM32F205的USB_BULK数据传输，并使用libusb_win32编写上位机进行数
     与usb_open相对应，关闭设备，是必须调用的, 返回0成功，<0 失败。
     ```
 
-    详细代码见PCproject-win
-
 ## PCB文件
 
-  详见USB_PCB文件夹。
+* 使用AD18进行设计
+* 原理图
+  ![原理图](pictures/原理图.png)
+* PCB
+  ![pcb_top](pictures/pcb_top.png)
+  ![pcb_bottom](pictures/pcb_bottom.png)
+  ![pcb](pictures/pcb_3d.png)
+  
+* 详见USB_PCB文件夹.
