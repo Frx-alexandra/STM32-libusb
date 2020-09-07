@@ -26,7 +26,7 @@ STM32F205RBT6的USB_BULK数据传输，并使用libusb_win32编写上位机进�
     * 首先打开CUBEMX,选择芯片型号为STM32F205RB
 
     * 然后打开NVIC配置选择2-2配置
-      ！[中断分组](pictures/中断配置.png)
+      ![中断分组](pictures/中断配置.png)
 
     * 之后配置RCC时钟，设置HSE时钟为外部时钟，并勾选 master clock output 1
       ![RCC时钟](pictures/RCC配置.png)
@@ -35,15 +35,15 @@ STM32F205RBT6的USB_BULK数据传输，并使用libusb_win32编写上位机进�
       ![usb配置](pictures/usb配置.png)
 
     * 打开middleware，usb_device,创建HID设备，并修改，PID、VID,等信息
-      ！[usb类型设置](pictures/USB类型配置.png)
+      ![usb类型设置](pictures/USB类型配置.png)
 
     * 之后来配置系统时钟，选择手动配置
       将外部HSE时钟频率修改为24MHZ,其他看图配置
-      ！[时钟配置](pictures/时钟配置.png)
+      ![时钟配置](pictures/时钟配置.png)
 
     * 打开project manager ，修改项目配置
-      ！[项目配置](pictures/项目配置1.png)
-      ！[项目配置](pictures/项目配置2.png)
+      ![项目配置](pictures/项目配置1.png)
+      ![项目配置](pictures/项目配置2.png)
 
   * 生成的程序打开后
     首选要打开```main.c```文件，修改 ```SystemClock_Config``` 中的时钟配置
